@@ -13,5 +13,12 @@ Técnico:
 - Devemos ter um webdriver compativél com o navegador para isso acessamos o link https://googlechromelabs.github.io/chrome-for-testing/
 
 Código:
-- navegador.manage().window().maximize(); = Aumenta a tela;
-gitgit
+- System.setProperty: Nós usamos para referenciar onde o arquivo com driver está.
+- WebDriver navegador: Criando um objeto da classe tipo WebDriver
+- new ChromeDriver(): Adicionado de "WebDriver navegador=" nos especificamos qual o driver iremos usar, cada navegador tem o seu.
+- navegador.manage().window().maximize(): Isso serve para maximinizar a tela ao máximo.
+- navegador.get(LINK QUE O NAVEGADOR DEVE ABRIR): Nós inserimos como parâmetro o link que o driver deve abrir.
+- navegador.findElement(PROCURA ELEMENTO DE TELA POR ID, NAME,CSS SELECTOR, XPATH, CLASS NAME): Procura um elemento de tela por id, name, cssSelector, xpath, nome de classe.
+- .click(): Após buscar o elemento nos clicamos nele;
+- .sendKeys(TEXTO DIGITADO): Após buscar o elementos digitamos o valor passado como parametro;
+- Assertions: É uma biblioteca na qual contém alguns timos de validações.
