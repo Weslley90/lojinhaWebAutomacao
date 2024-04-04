@@ -1,0 +1,17 @@
+Aula:
+- Os métodos de testes sempre são do tipo "void".
+- É uma boa prática colocar a palavra "test" nos métodos de testes.
+- Antes de começar de fato a códificar a automação devemos listar os passo a passo do automação.
+- Para automatizar testes devemos analisar o estado inicial do campo. Nessa aplicação devemos primeiro clicar e depois preencher o campo.
+- 1º ID, 2º Name, 3º cssSelectior, 4ºXcPATH
+- Quando a mensae=gem aparecer muito rápito devemos perguntar qual o id da mensagem
+
+
+Técnico:
+- WebDriver é uma interface;
+- As novas versões do Selenium WebDriver não suportam Java 8, temos que atualizar para o java 11 ou superior.
+- Devemos ter um webdriver compativél com o navegador para isso acessamos o link https://googlechromelabs.github.io/chrome-for-testing/
+
+Código:
+- navegador.manage().window().maximize(); = Aumenta a tela;
+gitgit
