@@ -5,6 +5,9 @@ Aula:
 - Para automatizar testes devemos analisar o estado inicial do campo. Nessa aplicação devemos primeiro clicar e depois preencher o campo.
 - 1º ID, 2º Name, 3º cssSelectior, 4ºXcPATH
 - Quando a mensae=gem aparecer muito rápito devemos perguntar qual o id da mensagem
+- Quando transferimos o código inicial para @BeforeEach os navegadores do método de "testNaoEPermitidoRegistrarProdutoComValorIgualAZero" ficam todos vermelhos
+por isso devemos criar o objetivo webdriver fora das dois métodos.
+A variavel que usamos dentro do método fica cinza enquanto o as variaveis da classe ficam roxas.
 
 
 Técnico:
