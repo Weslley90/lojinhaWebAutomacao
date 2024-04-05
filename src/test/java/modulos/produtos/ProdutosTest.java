@@ -1,9 +1,9 @@
 package modulos.produtos;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import paginas.LoginPage;
 
 import java.time.Duration;
 
@@ -16,7 +16,7 @@ public class ProdutosTest {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Wesll\\driver\\chromedriver_v123\\chromedriver.exe");
         this.navegador = new ChromeDriver();
         this.navegador.manage().window().maximize();
-        this.navegador.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        this.navegador.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         this.navegador.get("http://165.227.93.41/lojinha-web/v2");
     }
 
@@ -25,27 +25,86 @@ public class ProdutosTest {
     public void testNaoEPermitidoRegistrarProdutoComValorIgualAZero() {
 
         //Fazer o login
-        navegador.findElement(By.cssSelector("label[for=usuario]")).click();
-        navegador.findElement(By.id("usuario")).sendKeys("admin");
-        navegador.findElement(By.cssSelector("label[for=senha]")).click();
-        navegador.findElement(By.id("senha")).sendKeys("admin");
-        navegador.findElement(By.cssSelector("button[type=submit]")).click();
+        String mensagemApresentada = new LoginPage(navegador)
+                .informarUsuario("admin")
+                .informarSenha("admin")
+                .submeterFormulario()
+                .acessarFormularioDeAdicaoNovoProduto()
+                .informarNomeDoProduto("Samsung Book E400")
+                .informarValorDoProduto("000")
+                .informarCoresDoProduto("Preto")
+                .submeterFormularioAdicaoComErro()
+                .capturarMensagemApresentada();
 
-        //Abrir tela de produto
-        navegador.findElement(By.linkText("ADICIONAR PRODUTO")).click();
+        Assertions.assertEquals("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00", mensagemApresentada);
+    }
 
-        //Preencher formulário de um novo produto
-        navegador.findElement(By.id("produtonome")).sendKeys("Notebook Samsung E300");
-        navegador.findElement(By.id("produtovalor")).sendKeys("000");
-        navegador.findElement(By.id("produtocores")).sendKeys("Preto");
+    @Test
+    @DisplayName("Não é permitido registar um produto que o valormaior que 7.000,00")
+    public void testNaoEPermitidoRegistrarValoresAcimaDeSeteMil() {
+        String mensagemApresentada = new LoginPage(navegador).
+                informarUsuario("admin")
+                .informarSenha("admin")
+                .submeterFormulario()
+                .acessarFormularioDeAdicaoNovoProduto()
+                .informarNomeDoProduto("Samsung Galaxy S24")
+                .informarValorDoProduto("700001")
+                .informarCoresDoProduto("Preto, roxo")
+                .submeterFormularioAdicaoComErro()
+                .capturarMensagemApresentada();
 
-        //Submeter o formulário
-        navegador.findElement(By.cssSelector("button[type=submit]")).click();
+        Assertions.assertEquals("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00", mensagemApresentada);
+    }
 
-        //Vou validar a mensagem
-        String mensagem = navegador.findElement(By.cssSelector(".toast.rounded")).getText();
-        Assertions.assertEquals("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00", mensagem);
+    @Test
+    @DisplayName("Posso adicionar produtos que estejam na faixa de 0,01 a 7.000,00")
+    public void testPossoAdicionarProdutosComValorDeUmCentavoASeteMilReais() {
+        String mensagemApresentada = new LoginPage(navegador)
+                .informarUsuario("admin")
+                .informarSenha("admin")
+                .submeterFormulario()
+                .acessarFormularioDeAdicaoNovoProduto()
+                .informarNomeDoProduto("Samsung Galaxy M50")
+                .informarValorDoProduto("190000")
+                .informarCoresDoProduto("Azul, Branco, Preto")
+                .submeterFormularioAdicaoComSucesso()
+                .capturarMensagemApresentada();
 
+        Assertions.assertEquals("Produto adicionado com sucesso", mensagemApresentada);
+    }
+
+    @Test
+    @DisplayName("Posso adicionar produtos que estejam no limite de 0,01")
+    public void testPossoAdicionarProdutosComValorDeUmCentavo() {
+        String mensagemApresentada = new LoginPage(navegador)
+                .informarUsuario("admin")
+                .informarSenha("admin")
+                .submeterFormulario()
+                .acessarFormularioDeAdicaoNovoProduto()
+                .informarNomeDoProduto("Chiclete")
+                .informarValorDoProduto("001")
+                .informarCoresDoProduto("Rosa")
+                .submeterFormularioAdicaoComSucesso()
+                .capturarMensagemApresentada();
+
+        Assertions.assertEquals("Produto adicionado com sucesso", mensagemApresentada);
+    }
+
+    @Test
+    @DisplayName("Posso adicionar produtos que estejam no limite de 0,01")
+    public void testPossoAdicionarProdutosComValorDeSeteMil() {
+        String mensagemApresentada = new LoginPage(navegador)
+                .informarUsuario("admin")
+                .informarSenha("admin")
+                .submeterFormulario()
+                .acessarFormularioDeAdicaoNovoProduto()
+                .informarNomeDoProduto("Samsung Galaxy S23")
+                .informarValorDoProduto("700000")
+                .informarCoresDoProduto("Rosa")
+                .submeterFormularioAdicaoComSucesso()
+                .capturarMensagemApresentada();
+
+        Assertions.assertEquals("Produto adicionado com sucesso", mensagemApresentada);
     }
 
     @AfterEach
@@ -56,4 +115,6 @@ public class ProdutosTest {
 //Outros jeitos de clicar no botão:
 //navegador.findElement(By.tagName("button")).click();
 //navegador.findElement(By.name("action")).click();
+
+
 

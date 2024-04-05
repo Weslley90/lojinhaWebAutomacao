@@ -7,8 +7,12 @@ Aula:
 - Quando a mensae=gem aparecer muito rápito devemos perguntar qual o id da mensagem
 - Quando transferimos o código inicial para @BeforeEach os navegadores do método de "testNaoEPermitidoRegistrarProdutoComValorIgualAZero" ficam todos vermelhos
 por isso devemos criar o objetivo webdriver fora das dois métodos.
-A variavel que usamos dentro do método fica cinza enquanto o as variaveis da classe ficam roxas.
-
+- A variável que usamos dentro do método fica cinza enquanto o as variaveis da classe ficam roxas.
+- PageObject nos temos que ter 1- Um atributo da classe que seja do tipo webdriver. 2- Temos que ter um construtor que pegue um navegador de fora e coloque dentro do navegador/driver que o contrutor terá como
+- Métodos que interagem com a tela.
+- Quando escrevemos um método em um page object por exemplo ListaDeProdutosPage, que por sua vez retorna um outro page object como FormularioDeAdicaoDeProdutoPage, ao usar um método de ListaDeProdutosPage em ProdutosTest e adicionarmos "."
+para adicionar mais um outro método, é exibido apenas o métodos do page object retornada, que nesse exemplo é FormularioDeAdicaoDeProdutoPage.
+- Design patterns: Page Object e Fluent Pages usados.
 
 Técnico:
 - WebDriver é uma interface;
