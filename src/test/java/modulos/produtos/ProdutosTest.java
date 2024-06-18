@@ -26,8 +26,8 @@ public class ProdutosTest {
 
         //Fazer o login
         String mensagemApresentada = new LoginPage(navegador)
-                .informarUsuario("admin")
-                .informarSenha("admin")
+                .informarUsuario("nome_do_usuario")
+                .informarSenha("senha_do_usuario")
                 .submeterFormulario()
                 .acessarFormularioDeAdicaoNovoProduto()
                 .informarNomeDoProduto("Samsung Book E400")
@@ -40,11 +40,11 @@ public class ProdutosTest {
     }
 
     @Test
-    @DisplayName("Não é permitido registar um produto que o valormaior que 7.000,00")
+    @DisplayName("Não é permitido registar um produto que o valor maior que 7.000,00")
     public void testNaoEPermitidoRegistrarValoresAcimaDeSeteMil() {
         String mensagemApresentada = new LoginPage(navegador).
-                informarUsuario("admin")
-                .informarSenha("admin")
+                informarUsuario("nome_do_usuario")
+                .informarSenha("senha_do_usuario")
                 .submeterFormulario()
                 .acessarFormularioDeAdicaoNovoProduto()
                 .informarNomeDoProduto("Samsung Galaxy S24")
@@ -60,8 +60,8 @@ public class ProdutosTest {
     @DisplayName("Posso adicionar produtos que estejam na faixa de 0,01 a 7.000,00")
     public void testPossoAdicionarProdutosComValorDeUmCentavoASeteMilReais() {
         String mensagemApresentada = new LoginPage(navegador)
-                .informarUsuario("admin")
-                .informarSenha("admin")
+                .informarUsuario("nome_do_usuario")
+                .informarSenha("senha_do_usuario")
                 .submeterFormulario()
                 .acessarFormularioDeAdicaoNovoProduto()
                 .informarNomeDoProduto("Samsung Galaxy M50")
@@ -77,8 +77,8 @@ public class ProdutosTest {
     @DisplayName("Posso adicionar produtos que estejam no limite de 0,01")
     public void testPossoAdicionarProdutosComValorDeUmCentavo() {
         String mensagemApresentada = new LoginPage(navegador)
-                .informarUsuario("admin")
-                .informarSenha("admin")
+                .informarUsuario("nome_do_usuario")
+                .informarSenha("senha_do_usuario")
                 .submeterFormulario()
                 .acessarFormularioDeAdicaoNovoProduto()
                 .informarNomeDoProduto("Chiclete")
@@ -94,8 +94,8 @@ public class ProdutosTest {
     @DisplayName("Posso adicionar produtos que estejam no limite de 0,01")
     public void testPossoAdicionarProdutosComValorDeSeteMil() {
         String mensagemApresentada = new LoginPage(navegador)
-                .informarUsuario("admin")
-                .informarSenha("admin")
+                .informarUsuario("nome_do_usuario")
+                .informarSenha("senha_do_usuario")
                 .submeterFormulario()
                 .acessarFormularioDeAdicaoNovoProduto()
                 .informarNomeDoProduto("Samsung Galaxy S23")
